@@ -10,8 +10,8 @@ import { Separator } from "@/components/ui/separator";
 interface SidebarProps {
     feeds: FeedSource[];
     onRemove: (url: string) => void;
-    currentView: 'all' | 'bookmarks' | 'settings';
-    onViewChange: (view: 'all' | 'bookmarks' | 'settings') => void;
+    currentView: 'all' | 'bookmarks' | 'settings' | 'changelog';
+    onViewChange: (view: 'all' | 'bookmarks' | 'settings' | 'changelog') => void;
 }
 
 export function Sidebar({ feeds, onRemove, currentView, onViewChange }: SidebarProps) {
@@ -48,6 +48,16 @@ export function Sidebar({ feeds, onRemove, currentView, onViewChange }: SidebarP
                 >
                     <Settings className="mr-2 h-4 w-4" /> Settings
                 </Button>
+
+                <div className="pt-4 mt-4 border-t border-border/40">
+                    <Button
+                        variant={currentView === 'changelog' ? 'secondary' : 'ghost'}
+                        className="w-full justify-start text-muted-foreground hover:text-foreground"
+                        onClick={() => onViewChange('changelog')}
+                    >
+                        <span className="mr-2 h-4 w-4 flex items-center justify-center text-xs font-bold border rounded-full border-current">v</span> Changelog
+                    </Button>
+                </div>
             </div>
 
             <Separator className="my-2 opacity-50" />

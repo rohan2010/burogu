@@ -6,6 +6,7 @@ import { PostCard } from './post-card';
 import { Sidebar } from './sidebar';
 import { SettingsView } from './settings-view';
 import { DateFilter } from './date-filter';
+import { ChangelogView } from './changelog-view';
 import { fetchFeed } from '@/lib/rss';
 import { Loader2, RefreshCw, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,7 @@ export function FeedStream() {
   const [feeds, setFeeds] = useState<FeedSource[]>([]);
   const [items, setItems] = useState<PostItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState<'all' | 'bookmarks' | 'settings'>('all');
+  const [view, setView] = useState<'all' | 'bookmarks' | 'settings' | 'changelog'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const initialized = useRef(false);
@@ -154,6 +155,8 @@ export function FeedStream() {
             onAdd={handleFeedAdded}
             onRemove={handleRemoveFeed}
           />
+        ) : view === 'changelog' ? (
+          <ChangelogView />
         ) : (
           <>
             {/* Header Bar */}
